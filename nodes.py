@@ -8,7 +8,7 @@ class ON:
         }
     RETURN_TYPES = ("BOOLEAN",)
     FUNCTION = "on"
-    CATEGORY = "TuringComplete"
+    CATEGORY = "LogicGates"
 
     def on(self, on):
         return(on,)
@@ -30,7 +30,7 @@ class BYTE:
         }
     RETURN_TYPES = ("BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN",)
     FUNCTION = "BYTE"
-    CATEGORY = "TuringComplete"
+    CATEGORY = "LogicGates"
 
     def BYTE(self, one, two, three, four, five, six, seven, eight):
         return(one, two, three, four, five, six, seven, eight,)
@@ -48,7 +48,7 @@ class NAND:
     RETURN_TYPES = ("BOOLEAN",)
     FUNCTION = "NAND"
 
-    CATEGORY = "TuringComplete"
+    CATEGORY = "LogicGates"
 
     def NAND(self, one, two):
         return((not(one and two)),)
@@ -66,7 +66,7 @@ class AND:
     RETURN_TYPES = ("BOOLEAN",)
     FUNCTION = "AND"
 
-    CATEGORY = "TuringComplete"
+    CATEGORY = "LogicGates"
 
     def AND(self, one, two):
         return((one and two),)
@@ -84,7 +84,7 @@ class OR:
     RETURN_TYPES = ("BOOLEAN",)
     FUNCTION = "OR"
 
-    CATEGORY = "TuringComplete"
+    CATEGORY = "LogicGates"
 
     def OR(self, one, two):
         return((one or two),)
@@ -102,7 +102,7 @@ class NOR:
     RETURN_TYPES = ("BOOLEAN",)
     FUNCTION = "NOR"
 
-    CATEGORY = "TuringComplete"
+    CATEGORY = "LogicGates"
 
     def NOR(self, one, two):
         return((not(one or two)),)
@@ -119,7 +119,7 @@ class NOT:
     RETURN_TYPES = ("BOOLEAN",)
     FUNCTION = "NOT"
 
-    CATEGORY = "TuringComplete"
+    CATEGORY = "LogicGates"
 
     def NOT(self, one):
         return((not(one)),)
@@ -130,14 +130,14 @@ class XOR:
         return {
             "required": {
                 "one": ("BOOLEAN", {"forceInput": True}),
-                "one": ("BOOLEAN", {"forceInput": True}),
+                "two": ("BOOLEAN", {"forceInput": True}),
             },
         }
 
     RETURN_TYPES = ("BOOLEAN",)
     FUNCTION = "XOR"
 
-    CATEGORY = "TuringComplete"
+    CATEGORY = "LogicGates"
 
     def XOR(self, one, two):
         return((True if one != two else False),)
@@ -155,7 +155,7 @@ class XNOR:
     RETURN_TYPES = ("BOOLEAN",)
     FUNCTION = "XNOR"
 
-    CATEGORY = "TuringComplete"
+    CATEGORY = "LogicGates"
 
     def XNOR(self, one, two):
         return((not(True if one != two else False)),)
@@ -173,7 +173,7 @@ class SWITCH:
     RETURN_TYPES = ("BOOLEAN",)
     FUNCTION = "SWITCH"
 
-    CATEGORY = "TuringComplete"
+    CATEGORY = "LogicGates"
 
     def SWITCH(self, enable, one):
         return((one if enable else None),)
@@ -189,7 +189,7 @@ class BoolToString:
     
     RETURN_TYPES = ("STRING",)
     FUNCTION = "BoolToString"
-    CATEGORY = "TuringComplete"
+    CATEGORY = "LogicGates"
 
     def BoolToString(self, input):
         result = "True" if input else "False"
@@ -204,6 +204,8 @@ NODE_CLASS_MAPPINGS = {
     "OR": OR,
     "NOR": NOR,
     "NOT": NOT,
+    "XOR": XOR,
+    "XNOR": XNOR,
     "SWITCH": SWITCH,
     "BoolToString": BoolToString,
 
@@ -217,6 +219,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "OR": "OR",
     "NOR": "NOR",
     "NOT": "NOT",
+    "XOR": "XOR",
+    "XNOR": "XNOR",
     "SWITCH": "SWITCH",
     "BoolToString": "BoolToString",
 }
