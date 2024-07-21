@@ -13,7 +13,7 @@ class ON:
     def on(self, on):
         return(on,)
     
-class BYTE:
+class CreateBYTE:
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -29,11 +29,77 @@ class BYTE:
             },
         }
     RETURN_TYPES = ("BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN",)
-    FUNCTION = "BYTE"
+    FUNCTION = "CreateBYTE"
     CATEGORY = "LogicGates"
 
-    def BYTE(self, one, two, three, four, five, six, seven, eight):
+    def CreateBYTE(self, one, two, three, four, five, six, seven, eight):
         return(one, two, three, four, five, six, seven, eight,)
+
+class ByteToBits:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "byte": ("STRING", {"forceInput": True}),
+            },
+        }
+    RETURN_TYPES = ("BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN", "BOOLEAN",)
+    FUNCTION = "ByteToBits"
+    CATEGORY = "LogicGates"
+
+    def ByteToBits(self, byte):
+        bits = [bool(int(bit)) for bit in byte]
+        return(bits[0], bits[1], bits[2], bits[3], bits[4], bits[5], bits[6], bits[7],)
+
+class BitMemory:
+    def __init__(self):
+        self.bit = False
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "write": ("BOOLEAN", {"forceInput": True}),
+                "read": ("BOOLEAN", {"forceInput": True}),
+                "input": ("BOOLEAN", {"forceInput": True}),
+            },
+        }
+    RETURN_TYPES = ("BOOLEAN",)
+    FUNCTION = "BitMemory"
+    CATEGORY = "LogicGates"
+
+    def BitMemory(self, write, read, input):
+        output = False
+        if write:
+            self.bit = input
+        if read:
+            output = self.bit
+        return(output,)
+
+class ByteMemory: #Bytes are strings for easy testing right now, may use ints in the future
+    def __init__(self):
+        self.byte = "00000000"
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "write": ("BOOLEAN", {"forceInput": True}),
+                "read": ("BOOLEAN", {"forceInput": True}),
+                "input": ("String", {"forceInput": True}),
+            },
+        }
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "ByteMemory"
+    CATEGORY = "LogicGates"
+
+    def ByteMemory(self, write, read, input):
+        output = False
+        if write:
+            self.byte = input
+        if read:
+            output = self.byte
+        return(output,)
 
 class NAND:
     @classmethod
@@ -198,7 +264,7 @@ class BoolToString:
     
 NODE_CLASS_MAPPINGS = {
     "ON": ON,
-    "Byte": BYTE,
+    "CreateByte": CreateBYTE,
     "NAND": NAND,
     "AND": AND,
     "OR": OR,
@@ -207,13 +273,16 @@ NODE_CLASS_MAPPINGS = {
     "XOR": XOR,
     "XNOR": XNOR,
     "SWITCH": SWITCH,
+    "BitMemory": BitMemory,
+    "ByteMemory": ByteMemory,
+    "ByteToBits": ByteToBits,
     "BoolToString": BoolToString,
 
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "ON": "ON",
-    "BYTE": "BYTE",
+    "CreateBYTE": "CreateBYTE",
     "NAND": "NAND",
     "AND": "AND",
     "OR": "OR",
@@ -222,5 +291,8 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "XOR": "XOR",
     "XNOR": "XNOR",
     "SWITCH": "SWITCH",
+    "BitMemory": "BitMemory",
+    "ByteMemory": "ByteMemory",
+    "ByteToBits": "ByteToBits",
     "BoolToString": "BoolToString",
 }

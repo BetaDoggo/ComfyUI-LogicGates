@@ -10,7 +10,10 @@ I was playing [Turing Complete](https://store.steampowered.com/app/1444480/Turin
 - XOR
 - XNOR
 - SWITCH
+- BitMemory
 # Byte Nodes(WIP):
-- BYTE
+- CreateBYTE
+- ByteMemory
 # Misc Nodes:
+- ByteToBits
 - BoolToString - for testing
